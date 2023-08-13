@@ -1,0 +1,49 @@
+plugins {
+    id "java"
+    id 'java-library'
+    id 'application'
+    id 'com.github.johnrengelman.shadow' version '8.1.0'
+
+}
+
+group 'client'
+version 'client-1.0'
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'client.App'
+    }
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    implementation 'com.opencsv:opencsv:3.7'
+    implementation 'ch.qos.logback:logback-classic:1.4.6'
+    implementation 'com.google.guava:guava:31.1-jre'
+    implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation project(':common')
+    implementation 'org.apache.logging.log4j:log4j-core:2.20.0'
+    implementation 'org.apache.logging.log4j:log4j-api:2.20.0'
+
+
+}
+
+application {
+    mainClassName = 'client.App'
+}
+
+run {
+    main = 'client.App'
+    standardInput = System.in
+    classpath = sourceSets.main.runtimeClasspath
+    environment 'ROUTE_FILE', 'test.csv'
+}
