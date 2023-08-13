@@ -1,0 +1,8 @@
+rootProject.name = 'lab_6'
+include ':client'
+include ':server'
+include 'server:main'
+findProject(':server:main')?.name = 'main'
+include 'main'
+include ':common'
+
